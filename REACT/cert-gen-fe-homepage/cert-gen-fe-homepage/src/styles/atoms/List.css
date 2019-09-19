@@ -1,0 +1,15 @@
+.list_component{
+  color: #4D4F5C;
+}
+.list_element {
+  font-size: 17px;
+  list-style: none;
+  border-bottom: 1px solid #F5F5F5;
+  padding: 33px 16px;
+}
+.btn_container{
+  margin-top:-10px;
+}
+ul{
+  list-style-type: none;
+}

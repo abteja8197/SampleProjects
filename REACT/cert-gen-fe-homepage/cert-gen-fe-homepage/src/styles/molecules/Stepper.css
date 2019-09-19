@@ -1,0 +1,10 @@
+.stepper-component {
+  float: left;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 3em;
+}
+.gallery-component{
+  text-align: center;
+}

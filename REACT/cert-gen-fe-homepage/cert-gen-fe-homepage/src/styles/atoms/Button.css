@@ -1,0 +1,252 @@
+.button-component {
+  border: 1px dashed #f00;
+}
+/*Postion*/
+.gen{
+  position: relative;
+}
+/* bootstarp button*/
+.btn1{
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*next Button style */
+.next {
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  height: 35px;
+  width: 100px;
+  background-color: #4DA9E5;
+  color: #fff;
+  border-radius: 1.3em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.next:before {
+  content: '\003e';
+  position: absolute;
+  left:10px;
+}
+
+.next:hover:before {
+  position: absolute;
+    animation: mymove 1s ;
+}
+@keyframes mymove {
+  from {left: 10px;}
+  to {left: 80px;}
+}
+/* previous button*/
+.previous{
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  height: 35px;
+  width: 100px;
+  background-color: #ABEDCB;
+  color: #fff;
+  border-radius: 1.3em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  vertical-align: middle;
+  display: inline-block;  
+}
+.previous:after {
+  content: ' \003c  ';
+  position: absolute;
+ 
+}
+
+.previous:hover:after {
+  position: absolute;
+  
+  animation: mymove1 1s infinite;
+}
+@keyframes mymove1 {
+  from {left: 90px;}
+  to {left: 6px;}
+}
+/* close-rounded button*/
+.close-rounded {
+  border:1px solid #000;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 11px;
+  width:13.46px;
+  height: 13.46px;
+}
+.close-rounded:after {
+  content: "X";
+  display: block; 
+}
+.close-rounded:hover{
+  transform: scale(1.1);
+}
+
+/* close button */
+.close:after {
+  content: "X";
+  display: block; 
+}
+.close{
+  width:11.5px;
+  height: 11.5px;
+}
+
+/* primary button*/
+.btn-primary {
+  color: #fff;
+  background-color: #4DA9E5;
+  border-color: #2e6da4;
+  font-size: 18px;
+  padding: 6px 18px;
+}
+
+
+/* save*/
+ 
+.save:before{
+  content:url("../../favicons/save-icon.svg");
+  position: absolute;
+    left: 5px;
+    top: 4px;
+}
+.save{
+  position: relative;
+  width: 101.7px;
+  height: 39px;
+  padding: 0;
+  color: #fff;
+  background-color: #4DA9E5;
+  border-color: #2e6da4;
+  font-size: 18px;
+}
+
+/*one drive*/
+.onedrive {
+  color: #fff;
+  background-color: #4DA9E5;
+  border-color: #2e6da4;
+  font-size: 25px;
+  width: 225.49px;
+  height: 55.59px;
+  padding: 0;
+  text-align: unset;
+  padding-left: 23px;
+    padding-top: 27.6px;
+  position: relative;
+}
+.onedrive:after {
+  content:url("../../favicons/onedrive.svg");
+  position: absolute;
+  width: 90.97px;
+  height: 60.59px;
+  top: px;
+  top: 23px;
+  left: 160px;
+}
+
+/*download zip */
+.download-zip:after {
+  content:url("../../favicons/zipper.svg");
+  position: absolute;
+  width: 90.97px;
+  height: 60.59px;
+  top: px;
+  top: 0px;
+  left: 210px;
+}
+.download-zip {
+  position: relative;
+    color: #fff;
+    background-color: #4DA9E5;
+    border-color: #2e6da4;
+    font-size: 25px;
+    width: 225.49px;
+    height: 55.59px;
+    padding: 0;
+    text-align: unset;
+    padding-left: 23px;
+    padding-top: 27.6px;
+}
+
+/*delete button*/
+.delete{
+  content:url(../../favicons/trash.svg);
+}
+
+
+/* Add user*/
+.add-user{
+  content:url(../../favicons/new-user.svg);
+}
+
+/*import*/
+.import{
+  content:url(../../favicons/import.svg);
+}
+
+/*import-list*/
+.import-list{
+  position: relative;
+  width: 58px;
+  height: 44.1px;
+  margin-left:19px;
+}
+.import-list:after{
+  content:url(../../favicons/import.svg);
+  position: absolute;
+  
+}
+.import-list:before{
+  content:"Import List";
+  color:#000;
+  position: absolute;
+  top:41px;
+  left:10px;
+}
+
+/*Save List*/
+.save-list{
+  width: 49px;
+  height: 38.59px;
+  position: relative;
+  color: #4DA9E5;
+}
+.save-list:after{
+  content:url(../../favicons/save-list-icon.svg);  
+  position: absolute;
+}
+.save-list:before{
+  content:"Save List";
+  color: #4DA9E5;
+  position: absolute;
+  top:38px;
+  left:10px;
+}

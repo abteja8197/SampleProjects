@@ -1,0 +1,17 @@
+.textbox-container{
+  position: relative;
+}
+.btn-container{
+  display: inline-block;
+  float:right;
+}
+
+.adduser{
+  position: absolute;
+  left: 487px;
+  top: 0px;
+}
+.tool-component{
+  padding-bottom: 2em;
+  padding-left: 2em;
+}

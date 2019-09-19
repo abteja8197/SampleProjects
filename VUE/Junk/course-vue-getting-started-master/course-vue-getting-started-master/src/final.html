@@ -1,0 +1,640 @@
+<!--
+    This sample code is intended to be used for inspiration.
+    It is not 100% bullet proof. 
+    If you use this code, you're responsible for testing it.
+-->
+<html>
+    <head>
+        <title>Growler</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="http://rawgit.com/bassjobsen/typeahead.js-bootstrap-css/1.2.1/typeaheadjs.css" rel="stylesheet" media="screen">
+        
+        <style>
+            .headers {
+                font-family: 'Verdana';
+                margin: 0;
+                padding: 0;         
+                color: 'yellow';
+            }
+
+            .accent-color {
+                color:#FF6A00;
+            }
+
+            .add-button {
+                position:relative;
+                top: -6px;
+            }
+            .result-logo {
+                font-size:42px;
+                padding-top:8px;
+            }
+            
+            .rating-star {
+                padding-left: 0px !important;
+                padding-right: 0px !important;
+            }
+            
+            .help {
+                padding-left:8px;
+            }  
+
+            [v-cloak] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>        
+        <div id="growler" v-on:keydown.f1="openInfo">
+            <div class="container">
+                <div class="row" style="padding:1rem 0rem 0rem;">
+                    <div class="col-lg-3">
+                        <ul class="list-inline" v-cloak>
+                            <li><img alt="Growler" v-bind:src="appLogo" style="height:36px;" /></li>                            
+                            <li><h2 v-text="appName" v-bind:class="{'headers': true, 'accent-color': isOnline}" style="position:relative; top:6px;"></h2></li>
+                            <li><i class="fa fa-info-circle" style="font-size:24px; cursor:pointer; position:relative; top:4px;" onclick="showInfo();"></i></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-lg-5" style="padding-top:8px;">
+                        <!-- The search field -->
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input id="queryField" v-model.trim="query" v-on:keypress.enter.prevent="executeNewSearch" v-on:keyup.ctrl.enter="executeSearchInNewWindow" type="search" class="form-control" placeholder="please enter your query here." autofocus />
+                                    <div class="input-group-btn" data-toggle="tooltip" data-placement="right" title="This field toggles between which search index the query will be executed against.">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchIndexButton">Beers</span> <span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a id="beersSearchIndex" href="#">Beers</a></li>
+                                            <li><a id="breweriesSearchIndex" href="#">Breweries</a></li>
+                                        </ul>
+                                    </div>
+                                </div>                            
+                            </div>
+                        </form>                    
+                    </div>
+                
+                    <div class="col-lg-2" style="padding-top:8px;">
+                        <button id="searchButton" type="button" class="btn btn-primary" v-on:click.prevent="executeNewSearch">Search</button>
+                        <i class="fa fa-warning" v-if="locationWarning.length > 0" data-toggle="tooltip" data-placement="bottom" v-bind:title="locationWarning" style="font-size:18px; position:relative; top:4px; left:8px"></i>
+                    </div>
+                
+                    <div class="col-lg-2" style="padding-left:0px;">
+                        <!--
+                        <div class="btn-group add-button" data-toggle="tooltip" data-placement="left" title="This button will let you add a document to either the 'beers' or 'breweries' search index.">
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-plus"></span> <span class="caret"></span></button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a id="addNewBeerLink" href="#">Beer</a></li>
+                                <li><a id="addNewBreweryLink" href="#">Brewery</a></li>
+                            </ul>
+                        </div>                        
+                        -->
+                    </div>
+                </div>
+                <hr style="margin-top:0px;" />
+            
+                <!-- Display the facets and the results -->
+                <div id="noResultUI" class="row">
+                    <!-- This is intentionally blank. This is just a placeholder until a query is executed. -->
+                </div>
+            
+                <div id="resultUI" class="row" v-if="results !== null" v-cloak>
+                    <div class="col-lg-8">
+                        <!-- Search results -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p v-if="results.value.length === 0">There were no results for the query "{{ query }}". Please try again</p>
+                                <div v-else>
+                                    <div class="row" v-for="beer in results.value">
+                                        <div class="col-lg-2">
+                                            <span class="fa fa-beer result-logo" v-if="searchIndex === 'beers'"></span>
+                                            <span class="fa fa-industry result-logo" v-else-if="searchIndex === 'breweries'"></span>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div v-if="searchIndex === 'beers'">
+                                                <h5 v-on:click="showBeerInfo(beer.id)" style="cursor:pointer;">{{ beer.name }}</h5>
+                                                <p>{{ beer.breweryName }} ({{ beer.breweryLocation | getDistance }})</p>
+                                                <ul class='list-inline text-muted'>
+                                                    <li>ibu: {{ beer.ibu }}</li>
+                                                    <li>abv: {{ beer.abv }}</li>
+                                                    <li>last tapped: {{ beer.lastTappedOn | formatDate }}</li>
+                                                    <li>score: {{ beer['@search.score'] }}</li>
+                                                </ul>                                                
+                                            </div>
+
+                                            <div v-else-if="searchIndex === 'breweries'">
+                                                [brewery]
+                                            </div>
+                                        </div>
+                                    </div><br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pager -->
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-10">
+                                <nav v-if="pageCount > 1">
+                                    <ul class="pagination">                                        
+                                        <li v-for="page in pageCount" class="page-item">
+                                            <a href="#" v-on:click="executeSearch(page);" class="page-link">{{ page }}</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>                    
+                    </div>
+                
+                    <div class="col-lg-offset-1 col-lg-3 pull-right" v-if="results !== null">
+                        <form action="#">
+                            <div class="form-group">
+                                <label data-toggle="tooltip" data-placement="left" title="This demonstrates a query duration.">Query Duration</label>
+                                <p>{{ queryDuration }}</p>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label data-toggle="tooltip" data-placement="left" title="This demonstrates the 'count' parameter.">Query Results</label>
+                                <p>{{ resultCount }} {{ searchIndex }}</p>
+                            </div>           
+                        
+                            <div class="form-group">
+                                <label data-toggle="tooltip">Disclaimer</label>
+                                <p>
+                                    The data in this search service is fictional.
+                                    It is not intended to be used for real beers.
+                                    <br /><br />
+                                    The data in this search service is in a shared environment.
+                                    There may be other individuals modifying the data while you're using it.                                
+                                    Please be aware that you may experience unexpected results because of this.
+                                    <br /><br />
+                                    You can reset the data to its original state by clicking the button below.
+                                    <br /><br />
+                                    <!--
+                                    <button id="resetButton" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="This will reset growler to its original state.">Reset Data</button>
+                                    -->
+                                </p>
+                            </div>                        
+                        </form>                    
+                    </div>
+                </div>
+            </div>
+                
+            <!-- Beer Result Dialog -->
+            <div id="beerResultModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Beer</h4>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#beerResultInfo">Info</a></li>
+                                <li><a data-toggle="tab" href="#beerResultFlavors">Flavors</a></li>                            
+                                <li><a data-toggle="tab" href="#beerResultBrewery">Brewery</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="beerResultInfo" class="tab-pane fade in active">
+                                    <div style="padding:12px;">
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <div class="form-group">
+                                                    <label for="beerResultName">Name</label>
+                                                    <p id="beerResultName">[name]</p>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label for="beerResultDescription">Description</label>
+                                                    <p id="beerResultDescription"></p>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="col-xs-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="beerResultIbu">IBU</label>
+                                                            <p id="beerResultIbu"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="beerResultAbv">ABV</label>
+                                                            <p id="beerResultAbv"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="beerResultStatus">Actively Brewed</label>
+                                                    <p id="beerResultStatus">[status]</p>
+                                                </div>
+                                            
+                                                <div class="form-group">
+                                                    <label for="beerResultLastTappedOn">Last Tapped On</label>
+                                                    <p id="beerResultLastTappedOn">[last tapped on]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                </div>
+
+                                <div id="beerResultFlavors" class="tab-pane fade in">
+                                    <div style="padding:12px">
+                                        <div class="form-group">
+                                            <label for="beerResultFlavorList">Flavors</label>
+                                            <p id="beerResultFlavorList"></p>
+                                        </div>                                    
+                                    </div>
+                                </div>
+
+                                <div id="beerResultBrewery" class="tab-pane fade">
+                                    <div style="padding:12px;">
+                                        <div class="form-group">
+                                            <label for="beerResultBreweryName">Name</label>
+                                            <p id="beerResultBreweryName">[name]</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+      
+                        <div class="modal-footer">
+                            <div class="pull-left text-muted">
+                                <span>Beer ID:</span>
+                                <span id="beerResultId"></span>
+                            </div>                        
+                        
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Info Dialog -->
+            <div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">About</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                A special thanks to those in the open source community.
+                                I'm thankful for the efforts involved in creating the components this app uses.
+                                This app uses the following components and I'm thankful to their contributors.
+                            </p> 
+                        
+                            <table class="table">
+                                <thead>
+                                    <th>Library</th>
+                                    <th>Version</th>
+                                    <th>License</th>
+                                </thead>
+                            
+                                <tbody>
+                                    <tr>
+                                        <td><a href="https://github.com/bassjobsen/typeahead.js-bootstrap-css" target="_blank">Axios</a></td>
+                                        <td>0.15.2</td>
+                                        <td><a href="https://github.com/mzabriskie/axios/blob/master/LICENSE" target="_blank">MIT</a></td>
+                                    </tr>                                    
+                                    
+                                    <tr>
+                                        <td><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></td>
+                                        <td>3.3.6</td>
+                                        <td><a href="https://github.com/twbs/bootstrap/blob/v3.3.6/LICENSE" target="_blank">MIT</a></td>
+                                    </tr>
+                                    
+                                    <tr>    
+                                        <td><a href="https://eonasdan.github.io/bootstrap-datetimepicker/" target="_blank">Bootstrap Datepicker</a></td>
+                                        <td>4.17.37</td>
+                                        <td><a href="https://github.com/Eonasdan/bootstrap-datetimepicker/blob/v4.14.30/LICENSE" target="_blank">MIT</a></td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td><a href="https://jquery.com/" target="_blank">JQuery</a></td>
+                                        <td>1.11.3</td>
+                                        <td><a href="https://github.com/jquery/jquery/blob/1.11.3/MIT-LICENSE.txt" target="_blank">MIT</a></td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td><a href="https://twitter.github.io/typeahead.js/" target="_blank">Typeahead</a></td>
+                                        <td>0.11.1</td>
+                                        <td><a href="https://github.com/twitter/typeahead.js/blob/v0.11.1/LICENSE" target="_blank">MIT</a></td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td><a href="http://momentjs.com/" target="_blank">Moment.js</a></td>
+                                        <td>2.13.0</td>
+                                        <td><a href="https://github.com/moment/moment/blob/2.13.0/LICENSE" target="_blank">MIT</a></td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td><a href="https://github.com/bassjobsen/typeahead.js-bootstrap-css" target="_blank">Typeahead.js-bootstrap-css</a></td>
+                                        <td>1.2.1</td>
+                                        <td><a href="https://github.com/bassjobsen/typeahead.js-bootstrap-css/blob/1.2.1/LICENSE.md" target="_blank">MIT</a></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="https://github.com/bassjobsen/typeahead.js-bootstrap-css" target="_blank">Vue.js</a></td>
+                                        <td>2.2.5</td>
+                                        <td><a href="https://github.com/vuejs/vue/blob/dev/LICENSE" target="_blank">MIT</a></td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+      
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+        
+        <!-- 
+            Google Analytics is included to identify if individuals find the sample useful.
+            This data is used to identify if in-depth examples should be created for future courses.
+        -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-78628669-3', 'auto');
+            ga('send', 'pageview');            
+        </script>
+
+        <!-- Import External Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="https://twitter.github.io/typeahead.js/releases/0.11.1/typeahead.bundle.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.min.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/vue@2.2.5/dist/vue.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            Vue.config.keyCodes = {
+                f1: 112
+            };
+
+            var growler = new Vue({
+                el: '#growler',
+                data: {
+                    appName: 'Growler',
+                    appLogo: '/public/img/logo.png',
+                    isOnline: false, 
+                    
+                    query: '',
+                    maxAbv: 5,
+                    results: null,
+                    resultCount: 0,
+
+                    searchIndex:'beers',
+                    searchStartedAt:null,
+                    searchEndedAt: null,
+                    
+                    currentPage:1, 
+                    pageSize:7,
+                    pageCount: 0,
+
+                    shoppingCart: [],
+
+                    // These are the details used interact with the Azure Search Service behind this app.
+                    searchService: {
+                        url: 'https://ecofic-growler-dev.search.windows.net/indexes',
+                        apiParam: 'api-version=2015-02-28',
+                        apiKey: 'FAE8127A3ABAC769A752106C3D3A26DE',
+                        headers: {
+                            'api-key':'FAE8127A3ABAC769A752106C3D3A26DE',
+                            'Content-Type':'application/json'
+                        }
+                    },
+
+                    // These are the details used to interact with this app.
+                    appService: {
+                        url: 'http://ecofic.com/about/publications/courses/adding-search-abilities-to-your-apps-with-azure-search/add',                
+                        headers: {
+                            'api-key':'D71CECC93600E296532BDA6DAECD1687',
+                            'Content-Type':'application/json'                    
+                        }
+                    },                    
+
+                    currentLocation: null,
+                    locationWarning: ''
+                },
+                filters: {
+                    /**
+                     * Calculates the distance between two geographical points.
+                     * The calculation is made using the Haversine formula.
+                    */                
+                    getDistance: function(target) {
+                        var distance = 'unknown';
+                        if ((growler.currentLocation) && (target)) {
+                            var destination = target.coordinates;                    
+                            var latDiff = growler.convertDegreesToRadians(destination[1]-growler.currentLocation.latitude); 
+                            var lonDiff = growler.convertDegreesToRadians(destination[0]-growler.currentLocation.longitude); 
+  
+                            var a = Math.sin(latDiff/2) * Math.sin(latDiff/2) +
+                                Math.cos(growler.convertDegreesToRadians(growler.currentLocation.latitude)) * Math.cos(growler.convertDegreesToRadians(destination[1])) * 
+                                Math.sin(lonDiff/2) * Math.sin(lonDiff/2);                    
+                            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+
+                            var distanceInKm = 6371 * c;                    // 6371 is the radius of the Earth in kilometers. Remember: Distances in Azure Search are in Kilometers
+                            var distanceInMi = distanceInKm * 0.621371;
+                            distance = distanceInMi.toFixed(1) + ' mi. or ' + distanceInKm.toFixed(1) + ' km.';               
+                        }
+                        return distance;                        
+                    },
+
+                    /**
+                     * Formats the date value.
+                     **/
+                    formatDate: function(d) {
+                        var formatted = 'unknown';
+                        if (d) {
+                            formatted = d.substring(0, d.length-1);  // remove the last 'Z' for the purpose of conversion.
+                            formatted = moment(formatted, 'YYYY-MM-DDTHH:mm:ss').format('MM/DD/YYYY');
+                        }
+                        return formatted;      
+                    }
+                },
+                computed: {
+                    queryDuration: function() {
+                        var duration = this.searchEndedAt - this.searchStartedAt;
+                        return duration + ' ms';
+                    }
+                },
+                created: function() {
+                    var initialQuery = this.getQueryStringParameterValue('q');
+                    var self = this;
+
+                    if (navigator.geolocation) {                        
+                        navigator.geolocation.getCurrentPosition(
+                            function(position) {
+                                growler.currentLocation = position.coords;
+                                if (initialQuery) {
+                                    self.query = initialQuery;
+                                    self.executeNewSearch();
+                                }
+                            }, 
+                            function(error) { 
+                                switch(error.code) {
+                                    case error.PERMISSION_DENIED:
+                                        growler.locationWarning = 'You denied the request for Geolocation. Growler will not be able to correctly perform geospatial searches.';
+                                        break;
+                                    case error.POSITION_UNAVAILABLE:
+                                        growler.locationWarning = 'Your location could not be determined. Growler will not be able to correctly perform geospatial searches.';
+                                        break;
+                                    case error.TIMEOUT:
+                                        growler.locationWarning = 'Your location could not be determined. Growler will not be able to correctly perform geospatial searches.';
+                                        break;
+                                    case error.UNKNOWN_ERROR:
+                                        growler.locationWarning = 'An unknown error happened getting your location. Growler will not be able to correctly perform geospatial searches.';
+                                        break;
+                                }
+
+                                if (initialQuery) {
+                                    self.query = initialQuery;
+                                    self.executeNewSearch();
+                                }                                
+                            }
+                        );
+                    } else {
+//                        toggleWarning('Your browser does not have support for geolocation.', true);                    
+                    }
+
+                    // Detect whether we can hit the internet or not. We'll rely on the search service for this.
+                    var searchUrl = this.searchService.url + '/' + this.searchIndex + '/docs/suggest?' + this.searchService.apiParam;
+                    var searchParameters = {
+                        search: 'a',
+                        suggesterName:'beerSuggestions',
+                        top: 1
+                    };
+                    var searchConfig = { headers: this.searchService.headers };
+                    
+                    axios.post(searchUrl, searchParameters, { headers: this.searchService.headers })
+                        .then(function (response) {
+                            self.isOnline = true;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            self.isOnline = false;
+                        })
+                    ;                    
+                },
+
+                methods: {
+                    /**
+                     * Reacts to the user clicking the "search" button.
+                     */                    
+                    executeNewSearch: function(event) {
+                        this.executeSearch(1);
+                    },
+
+                    /**
+                     * Executes search in a new window.
+                     **/
+                    executeSearchInNewWindow: function(event) {
+                        var url = '/final.html?q=' + encodeURIComponent(this.query);
+                        var newWindow = window.open(url);
+                    },
+
+                    /**
+                     * Executes a search.
+                     */
+                    executeSearch: function(skipToPage) {
+                        var searchUrl = 
+                            this.searchService.url + '/' 
+                            + this.searchIndex + '/docs/search?'
+                            + this.searchService.apiParam
+                        ;
+
+                        var searchParameters = {
+                            search: (this.query) ? this.query : '*',
+                            count:true,
+                            queryType: this.queryType,
+                            top: this.pageSize,
+                        };
+
+                        var searchConfig = {
+                            headers: this.searchService.headers
+                        };
+
+                        this.currentPage = (skipToPage) ? skipToPage : 1;
+                        if (skipToPage > 1) {
+                            searchParameters.skip = (skipToPage-1) * this.pageSize;          
+                        }
+                        
+                        this.searchStartedAt = new Date().getTime();
+                        axios.post(searchUrl, searchParameters, searchConfig)
+                            .then(function (response) {
+                                growler.searchEndedAt = new Date().getTime();                                
+                                growler.results = response.data;                                
+                                growler.resultCount = response.data['@odata.count'];
+
+                                console.log(growler.results);
+                                var temp = (growler.resultCount + growler.pageSize - 1) / growler.pageSize;
+                                growler.pageCount = Math.floor(temp);
+                            })
+                            .catch(function (error) {
+                                alert('oops');
+                                console.log(error);
+                            })
+                        ;
+                    },
+
+                    showBeerInfo: function(beerId) {
+                        alert('show it! ' + beerId);
+                    },
+
+                    /**
+                     * This function converts degrees to radians.
+                    */
+                    convertDegreesToRadians: function(degrees) {
+                        return degrees * (Math.PI/180);
+                    },
+
+                    /**
+                     * Attempts to retrieve a query string parameter value.
+                     **/
+                    getQueryStringParameterValue(key) {
+                        var url = window.location.href;
+                        key = key.replace(/[\[\]]/g, "\\$&");
+                        
+                        var regex = new RegExp("[?&]" + key + "(=([^&#]*)|&|#|$)"),
+                        results = regex.exec(url);
+                        
+                        if (!results) return null;
+
+                        var v = results[2];
+                        if (!v) return '';
+                        return decodeURIComponent(v.replace(/\+/g, " "));
+                    },
+
+                    /**
+                     * Shows the info dialog
+                     **/
+                    openInfo: function(e) {
+                        e.preventDefault();
+                        $('#infoModal').modal('show');
+                    }
+                }
+            });  
+
+            $('#queryField').focus();          
+        </script>
+    </body>
+</html>

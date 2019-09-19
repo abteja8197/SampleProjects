@@ -1,0 +1,82 @@
+.upload-component {
+  margin: 36px 0 0 0;
+  color: #000000;
+  border: #CACED5 1px solid;
+  font-family: sans-serif;
+  height: 215.67px;
+  width: 251.4px;
+  padding: 0 8.82px;
+  
+}
+
+.upload-photo {
+  width: 65.78px;
+  height: 53.82px;
+  margin-top: 42.26px;
+}
+
+.upload-icon {
+  position: relative;
+  right: 37px;
+  bottom: 10px;
+}
+
+.upload-image-container {
+  margin-top: 12.07px;
+  text-align: center;
+  background-color: #F0F2F8;
+  border: #707070 1px solid;
+}
+
+.upload-text {
+  color: #4D4F5C;
+  font-size: 7px;
+  padding-top: 10px;
+}
+
+.drag-drop {
+  font-size: 14px;
+  color: #43425D;
+}
+
+.logo-file-text {
+  font-size: 7px;
+  color: #858687;
+}
+
+.browse-text {
+  color: #3B86FF;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.custom-file-input[type=file] {
+  /* color: transparent; */
+  width: 12.5%;
+  display: inline;
+  vertical-align: text-top;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+  display: inline;
+}
+
+.custom-file-input::before {
+  outline: none;
+  text-decoration: underline;
+  content: 'browse';
+  color: #3B86FF;
+  display: inline;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 7px;
+}
+
+.custom-file-input:focus {
+  outline: 0;
+}
+
+.selected-file-name {
+  font-size: 7px;
+}

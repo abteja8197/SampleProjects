@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div class="container">
+            <br />
+            <div id="growler">            
+                <p>An example of a computed property.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Beer</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr v-for="beer in selectedBeers">
+                            <td>{{ beer.name }}</td>
+                            <td>{{ beer.price | toDollar }}</td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td style="border-top-width:2px;">Subtotal</td>
+                            <td style="border-top-width:2px;">{{ subTotal | toDollar }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Sales Tax ({{ salesTaxRate }})</td>
+                            <td>{{ salesTax | toDollar }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="border-top-width:2px;">Grand Total</td>
+                            <td style="border-top-width:2px;">{{ grandTotal | toDollar }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <button class="btn btn-primary" v-on:click="generatePrices">Generate Random Beer Prices</button>
+                <button class="btn btn-seconary" v-on:click="generateNewTaxRate">Generate Random Tax Rate</button>
+            </div>
+        </div>
+
+        <!-- 
+            Google Analytics is included to identify if individuals find the sample useful.
+            This data is used to identify if in-depth examples should be created for future courses.
+        -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-78628669-3', 'auto');
+            ga('send', 'pageview');            
+        </script>
+
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.min.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/vue@2.2.5/dist/vue.js" type="text/javascript"></script>
+        
+        <script type="text/javascript">
+            var growler = new Vue({
+                el: '#growler',
+                data: {
+                    selectedBeers: [
+                        { name: 'Ahool Ale', price: 2.49 },
+                        { name: 'Pope Lick Porter', price: 3.52 },
+                        { name: 'Chocolate Pukwudgie Stout', price: 4.17 }
+                    ],
+                    subTotal: 0.00,                    
+                    salesTaxRate: 0.07
+                },
+                watch: {
+                    selectedBeers: function() {
+                        this.updateSubTotal();
+                    }
+                },
+                computed: {
+                    salesTax: function() {
+                        return this.subTotal * this.salesTaxRate;
+                    },
+
+                    grandTotal: function() {
+                        var tax = this.subTotal * this.salesTaxRate;
+                        return (tax + this.subTotal);
+                    }
+                },
+                filters: {
+                    toDollar: function(v) {
+                        return '$' + v.toFixed(2);
+                    }
+                },
+                created: function() {
+                    this.updateSubTotal();
+                },
+                methods: {
+                    updateSubTotal: function() {
+                        var t = 0;
+                        for (var i=0; i<this.selectedBeers.length; i++) {
+                            t += this.selectedBeers[i].price;
+                        }
+                        this.subTotal = t;
+                    },
+
+                    generatePrices: function() {
+                        for (var i=0; i<this.selectedBeers.length; i++) {
+                            var dollars = Math.floor((Math.random() * 4) + 1);                          // Get a random value between 1 and 4
+                            var cents = Math.floor((Math.random() * 99)) / 100;                         // Get a random value between 0 and 99
+
+                            var beer = this.selectedBeers[i];
+                            beer.price = Math.round((dollars + cents) * 100) / 100;
+                            Vue.set(this.selectedBeers, i, beer);                                       // Overcome limitations of JavaScript. Ensure Vue is aware of the change in data
+                        }
+                    },
+
+                    generateNewTaxRate: function() {
+                        var newTaxRate = Math.floor((Math.random() * 10) + 1) / 100;                    // Get a random value between 1 and 10                        
+                        this.salesTaxRate = newTaxRate;
+                    }
+                }
+            });        
+        </script>
+    </body>
+</html>

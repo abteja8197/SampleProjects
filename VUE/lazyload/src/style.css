@@ -1,0 +1,9 @@
+img{
+    width: 50%;
+    margin: 0 auto;
+}
+.lazyload {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}

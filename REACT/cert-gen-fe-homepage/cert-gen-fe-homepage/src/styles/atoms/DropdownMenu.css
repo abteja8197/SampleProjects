@@ -1,0 +1,67 @@
+.dropdown-table{
+  width:536px;
+
+}
+.dropdown-tbody{
+  display: block;
+  height:216px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.horiz-line{
+  display: block;
+  width: 500px;
+  float: left;
+  border: 1px solid #E8E9EC;
+
+}
+/* .dropdown-table::-webkit-scrollbar{
+  display: none;
+  background-color: black;
+}*/
+  
+.dropdown-tbody::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 2px 6px #ffffff;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+}
+
+.dropdown-tbody::-webkit-scrollbar {
+  width: 12px;
+  background-color: #FFFFFF;
+}
+
+.dropdown-tbody::-webkit-scrollbar-thumb {
+  border:1px solid #A4AFB7;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 2px 6px rgba(0, 0, 0, .3);
+  background-color:#ffffff;
+  
+}
+.dropdown-tbody::-webkit-scrollbar-button
+{
+  border-style: solid;
+  height: 16px;
+  width: 16px;
+}
+
+
+/* Up */
+.dropdown-tbody::-webkit-scrollbar-button:vertical:decrement
+{
+  border-width: 0 7px 14px 7px;
+  border-color: transparent transparent #404040 transparent;
+}
+
+
+
+/* Down */
+.dropdown-tbody::-webkit-scrollbar-button:vertical:increment
+{
+  border-width: 14px 7px 0 7px;
+  border-color: #404040 transparent transparent transparent;
+}
+
+
+
+

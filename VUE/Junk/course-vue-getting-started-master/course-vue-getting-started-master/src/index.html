@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="/public/css/app.css">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="container">
+                <a class="navbar-brand" href="/">Examples for Vue.js: Getting Started</a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item" style="padding-right:1.0rem;"><a class="btn btn-outline-warning" href="https://www.ecofic.com/subscribe/" target="_blank">subscribe to newsletter</a></li>                        
+                        <li class="nav-item"><a class="btn btn-outline-warning" href="/final.html">view full example</a></li>
+                    </ul>
+                </div>                
+            </div>
+        </nav>
+    
+        <div class="container">
+            <div id="appMessage"></div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-xs-12 col-lg-8">
+                    <h3>Examples by Module</h3>
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <h3 class="mb-0">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Module 01
+                                    </a>
+                                </h3>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-block">
+                                    <h4>Why Should I Care About Vue.js?</h4>
+                                    <ul>
+                                        <li><a href="/module-01/why-should-i-care-about-vue/simplicity/example-01.html">templating example</a></li>                                        
+                                        <li><a href="/module-01/why-should-i-care-about-vue/simplicity/example-02.html">templating example (basketball card)</a></li>
+                                    </ul>
+
+                                    <h4>Installing and Setting Up Vue</h4>
+                                    <ul>
+                                        <li><a href="/module-01/installing-and-setting-up-vue/example-01.html">basic template</a></li>
+                                        <li><a href="/module-01/installing-and-setting-up-vue/example-02.html">basic template with Axios</a></li>                                        
+                                    </ul>
+
+                                    <h4>Initializing an Instance of Vue</h4>
+                                    <ul>
+                                        <li><a href="/module-01/initializing-an-instance-of-vue/example-01.html">mounting to an HTML Element</a></li>
+                                        <li><a href="/module-01/initializing-an-instance-of-vue/example-02.html">mounting via CSS selector</a></li>
+                                        <li><a href="/module-01/initializing-an-instance-of-vue/example-03.html">the four main stages</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingTwo">
+                                <h3 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Module 02
+                                    </a>
+                                </h3>
+                            </div>
+
+                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="card-block">
+                                    <h4>Binding Content to a Template</h4>
+                                    <h5>Binding Text</h5>
+                                    <ul>
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-text/example-01.html">Semantic Binding 1</a></li>
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-text/example-02.html">Semantic Binding 2</a></li>
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-text/example-03.html">Semantic Binding 3</a></li>
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-text/example-04.html">Semantic Binding 4</a></li>
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-text/example-05.html">Declarative Binding (property not found)</a></li>                                        
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-text/example-06.html">One-Time Bindings</a></li>                                        
+                                    </ul>
+
+                                    <h5>Binding HTML</h5>
+                                    <ul>
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-html/example-01.html">Default HTML Rendering</a></li>
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-html/example-02.html">Using <code>v-html</code></a></li>                                        
+                                        <li><a href="/module-02/binding-content-to-a-template/binding-html/example-03.html">Attempting nested bindings</a></li>                                                                                
+                                    </ul>                                    
+
+                                    <h4>Binding to HTML Attributes</h4>
+
+                                    <h5>Binding to CSS Classes</h5>
+                                    <ul>
+                                        <li><a href="/module-02/binding-to-html-attributes/binding-to-css-classes/example-01.html">Binding to CSS Properties</a></li>
+                                        <li><a href="/module-02/binding-to-html-attributes/binding-to-css-classes/example-02.html">Binding to CSS Classes</a></li>
+                                        <li><a href="/module-02/binding-to-html-attributes/binding-to-css-classes/example-03.html">Getting CSS Classes from an Array</a></li>
+                                        <li><a href="/module-02/binding-to-html-attributes/binding-to-css-classes/example-04.html">Getting CSS Classes from an Object</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingThree">
+                                <h3 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Module 03
+                                    </a>
+                                </h3>
+                            </div>
+
+                            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="card-block">
+                                    <h4>Using Input Bindings</h4>
+                                    <h5>Binding to Text Fields</h5>
+                                    <ul>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-text-fields/example-01.html">Binding to a "text" <code>input</code> field.</a></li>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-text-fields/example-02.html">Binding to a <code>textarea</code> field.</a></li>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-text-fields/example-03.html">Text field bindings with different <code>input</code> types.</a></li>
+                                    </ul>
+
+                                    <h5>Binding to Checkboxes</h5>
+                                    <ul>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-checkboxes/example-01.html">Binding to a "checkbox" <code>input</code> field.</a></li>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-checkboxes/example-02.html">Binding to a checkbox list.</a></li>                                        
+                                    </ul>
+
+                                    <h5>Binding to Radio Buttons</h5>
+                                    <ul>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-radio-buttons/example-01.html">Binding to radio buttons.</a></li>                                        
+                                    </ul>
+                                    
+                                    <strong>Using Input Bindings</strong>
+                                    <ul>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-radio-buttons.html">Binding to Radio Buttons</a></li>
+                                        <li><a href="/module-03/using-input-bindings/binding-to-drop-down-lists.html">Binding to Drop-Down Lists</a></li>
+                                    </ul>
+
+                                    <strong>Modifying Bound Values</strong>
+                                    <ul>
+                                        <li><a href="/module-03/modifying-bound-values/modifying-bound-values.html">Modifying Bound Values</a></li>
+                                        <li><a href="/module-03/modifying-bound-values/trimming-string-values.html">Trimming String Values</a></li>
+                                        <li><a href="/module-03/modifying-bound-values/number-modifier.html">Converting Values to Numbers</a></li>                                
+                                    </ul>                            
+
+                                    <strong>Lazily Binding Values</strong>
+                                    <ul>
+                                        <li><a href="/module-03/lazily-binding-values/example-01.html">The default binding approach (<code>input</code> event)</a></li>
+                                        <li><a href="/module-03/lazily-binding-values/example-02.html">The lazy binding approach (<code>change</code> event)</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingFour">
+                                <h3 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Module 04
+                                    </a>
+                                </h3>
+                            </div>
+
+                            <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div class="card-block">
+                                    <h4>Using Event Handlers</h4>
+                                    <h5>Attaching to Events</h5>
+                                    <ul>
+                                        <li><a href="/module-04/using-event-handlers/attaching-to-events/example-01.html">Attaching to an Event</a></li>
+                                    </ul>
+
+                                    <h5>Defining an Event Handler</h5>
+                                    <ul>
+                                        <li><a href="/module-04/using-event-handlers/defining-an-event-handler/example-01.html">Defining an Event Handler</a></li>
+                                    </ul>
+
+                                    <h5>Examining the Event</h5>
+                                    <ul>
+                                        <li><a href="/module-04/using-event-handlers/examining-the-event/example-01.html">Examining the Event</a></li>
+                                    </ul>                                    
+
+                                    <h5>Passing Parameters with Inline Statements</h5>
+                                    <ul>
+                                        <li><a href="/module-04/using-event-handlers/passing-parameters-with-inline-statements/example-01.html">Passing a string with an inline statement</a></li>
+                                        <li><a href="/module-04/using-event-handlers/passing-parameters-with-inline-statements/example-02.html">Passing a <code>Number</code> with an inline statement</a></li>
+                                        <li><a href="/module-04/using-event-handlers/passing-parameters-with-inline-statements/example-03.html">Passing a <code>Date</code> with an inline statement</a></li>
+                                        <li><a href="/module-04/using-event-handlers/passing-parameters-with-inline-statements/example-04.html">Passing an <code>Object</code> with an inline statement</a></li>                                        
+                                    </ul>
+
+                                    <!--
+                                        <li><a href="/module-04/using-event-handlers/handling-events-with-methods.html">Handling Events</a></li>                                
+                                        <li><a href="/module-04/using-event-handlers/handling-events-inline.html">Handling Events Inline</a></li>
+                                        <li><a href="/module-04/using-event-handlers/shorthand-syntax.html">Shorthand Syntax</a></li>
+                                    -->
+
+                                    <h4>Altering Events</h4>
+                                    <h5>Understanding Event Propagation</h5>
+                                    <ul>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/example-01.html">Demo</a></li>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-capture-modifier.html">Using the Capture Modifier</a></li>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/mixing-capturing-and-bubbling.html">Mixing Capturing and Bubbling</a></li>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-prevent-modifier.html">Using the Prevent Modifier</a></li>                                        
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-prevent-modifier-on-ancestor.html">Using the Prevent Modifier on an Ancestor</a></li>                                                                                
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-stop-modifier.html">Using the Stop Modifier</a></li>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-stop-modifier-on-ancestor.html">Using the Stop Modifier on an Ancestor</a></li>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-self-modifier.html">Using the Self Modifier</a></li>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-self-modifier-on-ancestor.html">Using the Self Modifier on an Ancestor</a></li>
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-once-modifier.html">Using the Once Modifier</a></li>                                        
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/using-the-once-modifier-propagation.html">Once Modifier Event Propagation</a></li>                                                                                
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/comparing-event-modifiers.html">Comparing Event Modifiers</a></li>                                        
+                                        <li><a href="/module-04/altering-events/understanding-event-propagation/chaining-modifiers-together.html">Chaining Event Modifiers Together</a></li>                                        
+                                    </ul>
+
+                                    <h5>Reacting to Keyed Events</h5>
+                                    <ul>
+                                        <li><a href="/module-04/altering-events/reacting-to-keyed-events/example-01.html">Demo</a></li>
+                                        <li><a href="/module-04/altering-events/reacting-to-keyed-events/example-02.html">Using the <code>enter</code> modifier</a></li>                                        
+                                        <li><a href="/module-04/altering-events/reacting-to-keyed-events/custom-modifier.html">Using Custom Modifiers</a></li>                                        
+                                    </ul>
+
+                                    <h5>Reacting to Mouse Events</h5>
+                                    <ul>
+                                        <li><a href="/module-04/altering-events/reacting-to-mouse-events/all.html">All mouse modifiers in one example</a></li>
+                                    </ul>
+                                    
+                                    <strong>Reacting to the Left Mouse Button</strong>                                    
+                                    <ul>
+                                        <li><a href="/module-04/altering-events/reacting-to-mouse-events/using-the-left-mouse-modifier/example-01.html">An example with the <code>onmousedown</code> event</a></li>
+                                        <li><a href="/module-04/altering-events/reacting-to-mouse-events/using-the-left-mouse-modifier/example-02.html">An example with the <code>onclick</code> event</a></li>
+                                    </ul>
+
+                                    <strong>Reacting to the Middle Mouse Button</strong>
+                                    <ul>
+                                        <li><a href="/module-04/altering-events/reacting-to-mouse-events/using-the-middle-mouse-modifier/example-01.html">An example with the <code>onmousedown</code> event</a></li>
+                                    </ul>
+
+                                    <strong>Reacting to the Right Mouse Button</strong>
+                                    <ul>
+                                        <li><a href="/module-04/altering-events/reacting-to-mouse-events/using-the-right-mouse-modifier/example-01.html">An example with the <code>onmousedown</code> event</a></li>
+                                        <li><a href="/module-04/altering-events/reacting-to-mouse-events/using-the-right-mouse-modifier/example-02.html">An example with the <code>click</code> and <code>contextmenu</code> events</a></li>
+                                        <li><a href="/module-04/altering-events/reacting-to-mouse-events/using-the-right-mouse-modifier/example-03.html">A custom context menu</a></li>
+                                    </ul>
+
+                                    <h5>Reacting to Special Keys</h5>
+                                    <ul>
+                                        <li><a href="/module-04/altering-events/reacting-to-special-keys/example-01.html">Demo</a></li>                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingFive">
+                                <h3 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        Module 05
+                                    </a>
+                                </h3>
+                            </div>
+
+                            <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+                                <div class="card-block">
+                                    <h4>Rendering Elements Conditionally</h4>
+                                    <h5>On Load</h5>
+                                    <ul>
+                                        <li><a href="/module-05/rendering-elements-conditionally/on-load/example-01.html">simulation with poor load time</a></li>
+                                        <li><a href="/module-05/rendering-elements-conditionally/on-load/example-02.html"><code>v-cloak</code> in action</a></li>
+                                    </ul>
+
+                                    <h5>At Runtime</h5>
+                                    <ul>
+                                        <li><a href="/module-05/rendering-elements-conditionally/at-runtime/example-01.html"><code>if</code>-<code>else</code> directives</a></li>
+                                        <li><a href="/module-05/rendering-elements-conditionally/at-runtime/example-02.html"><code>v-show</code> directive</a></li>                                        
+                                    </ul>
+
+                                    <h5>Comparing <code>v-if</code> And <code>v-show</code></h5>
+                                    <ul>
+                                        <li><a href="/module-05/rendering-elements-conditionally/comparing-if-and-show/example-01.html">Using <code>v-if</code> and <code>v-show</code> together</a></li>
+                                    </ul>
+
+                                    <h4>Rendering Lists of Items</h4>
+                                    <h5>Looping a Specific Number of Times</h5>
+                                    <ul>
+                                        <li><a href="/module-05/rendering-lists-of-items/looping-a-specific-number-of-times/example-01.html">example 01</a></li>
+                                        <li><a href="/module-05/rendering-lists-of-items/looping-a-specific-number-of-times/example-02.html">floating-point number test</a></li>
+                                        <li><a href="/module-05/rendering-lists-of-items/looping-a-specific-number-of-times/example-03.html">using <code>of</code> in a <code>v-for</code></a></li>
+                                    </ul>
+
+                                    <h5>Traversing Object Properties</h5>
+                                    <ul>
+                                        <li><a href="/module-05/rendering-lists-of-items/traversing-object-properties/example-01.html">getting property values</a></li>
+                                        <li><a href="/module-05/rendering-lists-of-items/traversing-object-properties/example-02.html">getting property keys</a></li>                                        
+                                        <li><a href="/module-05/rendering-lists-of-items/traversing-object-properties/example-03.html">getting property index</a></li>                                        
+                                    </ul>
+
+                                    <h5>Iterating through Arrays</h5>
+                                    <ul>
+                                        <li><a href="/module-05/rendering-lists-of-items/iterating-through-arrays/example-01.html">iterating through an array of values</a></li>
+                                        <li><a href="/module-05/rendering-lists-of-items/iterating-through-arrays/example-02.html">iterating through an array of objects</a></li>
+                                        <li><a href="/module-05/rendering-lists-of-items/iterating-through-arrays/example-03.html">getting the index of an array object</a></li>
+                                        <li><a href="/module-05/rendering-lists-of-items/iterating-through-arrays/example-04.html">iterating through an array of arrays</a></li>
+                                    </ul>
+
+                                    <h5>using-v-for-and-v-if-together</h5>
+                                    <ul>
+                                        <li><a href="/module-05/rendering-lists-of-items/using-v-for-and-v-if-together/example-01.html">using <code>v-for</code> and <code>v-if</code> together</a></li>
+                                    </ul>
+
+                                    <h4>Detecting Array Changes</h4>
+                                    <h5>Changing an Array</h5>
+                                    <strong>sort</strong>
+                                    <ul>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/sort-function/example-01.html">Sorting an array of strings</a></li>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/sort-function/example-02.html">Sorting an array of numbers</a></li>
+                                    </ul>
+
+                                    <strong>reverse</strong>
+                                    <ul>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/reverse-function/example-01.html">Reversing a sorted <code>Array</code></a></li>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/reverse-function/example-02.html">Reversing an unsorted <code>Array</code></a></li>
+                                    </ul>
+
+                                    <strong>Pushing and Popping Array Items</strong>
+                                    <ul>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/push-and-pop-function/example-01.html">Push items onto an <code>Array</code></a></li>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/push-and-pop-function/example-02.html">Pop items off an <code>Array</code></a></li>                                        
+                                    </ul>
+
+                                    <strong>Using the Shift and Unshift Functions</strong>
+                                    <ul>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/shift-and-unshift-functions/example-01.html">Unshift items onto an <code>Array</code></a></li>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/shift-and-unshift-functions/example-02.html">Shift items off an <code>Array</code></a></li>                                                                                
+                                    </ul>                                    
+
+                                    <strong>Splicing an Array</strong>
+                                    <ul>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/splice-function/example-01.html">Removing a specific number of items with <code>splice</code></a></li>                                        
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/splice-function/example-02.html">Removing remaining items with <code>splice</code></a></li>                                        
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/splice-function/example-03.html">Inserting items with <code>splice</code></a></li>
+                                    </ul>
+
+                                    <strong>Updating an Array</strong>
+                                    <ul>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/updating-an-array-element/example-01.html">Updating an array item</a></li>
+                                        <li><a href="/module-05/detecting-array-changes/changing-an-array/updating-an-array-element/example-02.html">Updating an array item with <code>splice</code></a></li>                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingSix">
+                                <h3 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        Module 06
+                                    </a>
+                                </h3>
+                            </div>
+
+                            <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+                                <div class="card-block">
+                                    <ul>
+                                        <li><a href="/module-06/example-01.html">lifecycle of watchers, computed properties, and filters.</a></li>
+                                    </ul>
+
+                                    <h4>Monitoring Changes with Watchers</h4>
+                                    <h5>Introduction</h5>
+                                    <ul>
+                                        <li><a href="/module-06/monitoring-changes-with-watchers/example-01.html">Using watched property</a></li>
+                                        <li><a href="/module-06/monitoring-changes-with-watchers/example-02.html">Using watched property with a reference</a></li>                                        
+                                    </ul>
+
+                                    <h5>Defining a Watcher's Behavior</h5>
+                                    <ul>
+                                        <li><a href="/module-06/monitoring-changes-with-watchers/defining-a-watchers-behavior/example-01.html">Introductory example</a></li>
+                                        <li><a href="/module-06/monitoring-changes-with-watchers/defining-a-watchers-behavior/example-02.html">Simplified example</a></li>                                        
+                                        <li><a href="/module-06/monitoring-changes-with-watchers/defining-a-watchers-behavior/example-03.html">Getting before and after values</a></li>                                        
+                                    </ul>
+
+
+                                    <h5>Defining a Watcher's Depth</h5>
+                                    <ul>
+                                        <li><a href="/module-06/monitoring-changes-with-watchers/defining-a-watchers-depth/example-01.html">Example</a></li>
+                                    </ul>
+                                    <br />
+
+                                    <h4>Faster Rendering with Computed Properties</h4>
+                                    <ul>
+                                        <li><a href="/module-06/faster-rendering-with-computed-properties/initializing-a-computed-property/example-01.html">Initializing a computed property</a></li>
+                                        <li><a href="/module-06/faster-rendering-with-computed-properties/using-computed-properties-as-accessors/example-01.html">Adding a getter</a></li>                                        
+                                        <li><a href="/module-06/faster-rendering-with-computed-properties/using-computed-properties-as-accessors/example-02.html">Adding a setter</a></li>                                        
+                                        <li><a href="/module-06/faster-rendering-with-computed-properties/using-computed-properties-as-accessors/example-03.html">Auto generation</a></li>                                                                                
+                                    </ul>
+
+                                    <h4>Formatting with Filters</h4>
+                                    <ul>
+                                        <li><a href="/module-06/formatting-with-filters/example-01.html">using a filter</a></li>
+                                        <li><a href="/module-06/formatting-with-filters/example-02.html">passing a parameter to a filter</a></li>
+                                        <li><a href="/module-06/formatting-with-filters/example-03.html">programmatically calling filters</a></li>
+                                        <li><a href="/module-06/formatting-with-filters/example-04.html">chaining filters together</a></li>
+                                        <li><a href="/module-06/formatting-with-filters/example-05.html">comparing methods and filters</a></li>                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br /><br />                    
+                </div>
+
+                <div class="col-xs-12 col-lg-4">
+                    <h3>About these Examples</h3>
+                    <p>
+                        These examples complement the <a href="https://www.ecofic.com/courses/vue-getting-started" target="_blank">Vue.js: Getting Started</a> training course.
+                        For that reason, the examples are explained within the course itself.
+                    </p>
+
+                    <p>
+                        Issues reported in this repository are not monitored. 
+                        Issues regarding this repository are only responded to via this Pluralsight course's discussion page.
+                        Only issues reported in the Pluralsight course discussion page will be addressed.
+                        If you do not have a Pluralsight subscription, I'd like to offer you a <a href="http://goo.gl/X4YFPN" target="_blank">free trial</a>.
+                    </p> 
+                    <br />
+
+                    <div id="examples">
+                        <h3>More Examples</h3>
+                        <p>
+                            Here are some examples of apps using Vue online.
+                            If you would like your app listed here, please let me know on Twitter (<a href="www.twitter.com/chadcampbell" target="_blank">@chadcampbell</a>)
+                        </p>
+
+                        <ul class="list-unstyled">
+                            <li v-for="example in examplesToDisplay">
+                                <div>
+                                    <a v-bind:href="example.url" target="_blank">{{ example.name }}</a><br />                                    
+                                    <small class="text-muted">By <a v-bind:href="example.author.url" target="_blank" style="color:#636c72;">{{ example.author.name }}</a></small>
+                                </div>
+                                <br />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">These examples complement the <a href="https://www.ecofic.com/courses/vue-getting-started" target="_blank">Vue.js: Getting Started</a> training course.</span>
+            </div>
+        </footer>
+
+        <!-- 
+            Google Analytics is included to identify if individuals find the sample useful.
+            This data is used to identify if in-depth examples should be created for future courses.
+        -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-78628669-3', 'auto');
+            ga('send', 'pageview');            
+        </script>
+
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="/public/js/app.js" type="text/javascript"></script>
+
+        <script src="https://unpkg.com/vue@2.2.5/dist/vue.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var growler = new Vue({
+                el: '#examples',
+                data: {
+                    examplesToDisplay: [],
+                    examples: [
+                        { name: 'UUID Generator', url: 'https://www.ecofic.com/utils/uuid-generator', author: { name: 'Ecofic', url: 'https://twitter.com/ecofic' } },
+                        { name: 'Password Generator', url: 'https://www.ecofic.com/password-generator/', author: { name: 'Ecofic', url: 'https://twitter.com/ecofic' } },
+                        { name: 'Password Trainer', url: 'http://www.ecofic.com/password-trainer/', author: { name: 'Ecofic', url: 'https://twitter.com/ecofic' } },                        
+                    ]
+                },
+                created: function() {
+                    var picked = [];
+
+                    // Pick at most, 5 random examples
+                    var exampleCount = (this.examples.length >= 5) ? 5 : this.examples.length;
+                    for (var i=0; i<exampleCount; i++) {
+                        var breaker = 0;
+                        
+                        var randomIndex = Math.floor(Math.random() * exampleCount);
+                        if (picked.length > 0) {
+                            while ($.inArray(randomIndex, picked) !== -1) {
+                                randomIndex = Math.floor(Math.random() * exampleCount);
+                                breaker = breaker + 1;
+                                if (breaker > 1000) {
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (breaker < 1000) {
+                            this.examplesToDisplay.push(this.examples[randomIndex]);
+                            picked.push(randomIndex);
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

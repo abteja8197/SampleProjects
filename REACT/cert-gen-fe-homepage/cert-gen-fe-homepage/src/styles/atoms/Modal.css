@@ -1,0 +1,17 @@
+.modal-component {
+  height: 90vh;
+}
+
+.svg:not(:root) {
+  overflow: hidden;
+  margin-right: 1.5in;
+}
+
+.styles_modal__gNwvD {
+  max-width: none;
+  position: static;
+  padding: 0;
+  background: transparent;
+  background-clip: padding-box;
+  margin: auto;
+}

@@ -1,0 +1,54 @@
+.relative {
+  position: relative;
+}
+
+.thumb-component {
+  transition: all 1s ease-in-out;
+  display: inline-flex;
+}
+
+.thumb-component a {
+  text-decoration: none;
+}
+  
+.thumb:hover .thumb-img{
+      transform: scale(1.03);
+      box-shadow: 0 0 12px #4DA9E5;
+      -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+      filter: blur(2px);
+        
+  }
+  
+.thumb:hover .check-box, .thumb:hover .view-btn, .thumb:hover .view-text {
+      filter: none;
+      display: block;
+      z-index: 2;
+  }
+
+.view-btn {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 142px;
+}
+.view-text {
+  display: none;
+  position: absolute;
+  top: 113px;
+  left: 147px;
+  color: #000000;
+}
+.thumb-text {
+  text-align: center;
+  color: #000000;
+}
+.check-box {
+  display: none;
+  position: absolute;
+  left: 57px;
+  bottom: 62px;
+  height: 16px;
+  width: 16px;
+  box-shadow: 0 0 6px #4DA9E5;
+  
+}

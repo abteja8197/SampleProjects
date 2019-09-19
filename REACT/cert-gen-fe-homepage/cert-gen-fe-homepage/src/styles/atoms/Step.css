@@ -1,0 +1,38 @@
+.step {
+  border-radius: 40px;
+  height: 40px;
+  width: 40px;
+}
+
+.inactive {
+  background: grey;
+}
+
+.in-progress {
+  background: #1683ff;
+}
+
+.completed {
+  background: #61c742;
+}
+.step-text {
+  color: #ffffff;
+  position: relative;
+  font-size: 26px;
+  top: 1px;
+  left: 12px;
+}
+.step-description{
+  text-align: center;
+  padding-top: 1em;
+}
+@media (min-width: 320px) and (max-width: 480px) {  
+  .step {
+    border-radius: 15px;
+    height: 15px;
+    width: 15px;
+  }
+  .step-text {
+    display: none;
+  }
+}

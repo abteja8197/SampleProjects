@@ -1,0 +1,15 @@
+.textarea-component {
+  display: block;
+  font-family: Source Sans Pro;
+  font-size: 11px;
+  color: #4D4F5C;
+  padding: 10.4px 14.9px;
+  width: 536px;
+  height: 130px;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px;
+  resize: none;
+}
+.textarea-component:focus{
+  border: none;
+}
