@@ -1,0 +1,43 @@
+.page {
+    border-top: 10px solid #FFD100;
+    font-family: Helvetica;
+}
+.page .section1 {
+    margin: 0 auto;
+    color: #001489;
+    font-size: 60px;
+    font-weight: bold;
+}
+.page .section2 {
+    margin: 0 auto;
+    line-height: 20px;
+}
+.page .section3 {
+    margin: 0 auto;
+}
+.page .section3 .form-group {
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.page .section4 {
+    margin: 0 auto;
+}
+.page .section5 {
+    margin: 0 auto;
+    text-align: right;
+    padding-right: 2.12%;
+    padding-top: 1.56%;
+    padding-bottom: 1.46%;
+    background-color: #ECECEA;
+}
+.page .section5 .next-button {
+    background-color: #FFD100;
+    padding: 15px 60px;
+    text-decoration: none;
+    color: #021394;
+}
+.form-element {
+    margin: 0 auto;
+}
