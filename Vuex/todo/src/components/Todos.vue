@@ -1,33 +1,39 @@
 <template>
     <div id="Todos">
-        <div>
-        <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+        <loading :active.sync="isLoading" 
+        :can-cancel="false" 
+        :is-full-page="true"></loading>
 
-        <b-modal id="modal-1" title="BootstrapVue">
-            <p class="my-4">Hello from modal!</p>
-        </b-modal>
-        </div>
-        <div class="todos grid-4">
+        <div class="todos">
             <button class="navBtn" @click="type='allTasks'">All Tasks</button>
             <button class="navBtn" @click="type='doneTasks'">Completed</button>
             <button class="navBtn" @click="type='undoneTasks'">To Do</button>
-            <h2 v-show="type==='allTasks'">{{allTodosCount}} Tasks</h2>
-            <h2 v-show="type==='doneTasks'">{{doneTodosCount}} Tasks</h2>
-            <h2 v-show="type==='undoneTasks'">{{undoneTodosCount}} Tasks</h2>
+        
+            <p>Double click to Toggle the task</p>
+            <p><span class="complete-box"> </span> Complete</p>
+            <p><span class="incomplete-box"> </span> Incomplete</p>
+        </div>
+        <div>
+            <h2 v-show="type==='allTasks'"> All {{allTodosCount}} Tasks</h2>
+            <h2 v-show="type==='doneTasks'">{{doneTodosCount}} Tasks Done</h2>
+            <h2 v-show="type==='undoneTasks'">{{undoneTodosCount}} Tasks to be done</h2>
         </div>
         <div class="todos" v-if="type==='allTasks'">
-            <div v-for="todo in allTodos" :key="todo.id" class="todo">
+            <div v-for="todo in allTodos" :key="todo.id" class="todo" :class="{'is-complete': todo.completed}" @dblclick="toggleStatus(todo)">
                 {{todo.title}}
+                <i class="fas fa-trash-alt icon" @click='deleteTodo(todo.id)'></i>
             </div>
         </div>
         <div class="todos" v-if="type==='doneTasks'">
             <div v-for="todo in doneTodos" :key="todo.id" class="todo">
                 {{todo.title}}
+                <i class="fas fa-trash-alt icon" @click='deleteTodo(todo.id)'></i>
             </div>
         </div>
         <div class="todos" v-if="type==='undoneTasks'">
             <div v-for="todo in undoneTodos" :key="todo.id" class="todo">
                 {{todo.title}}
+                <i class="fas fa-trash-alt icon" @click='deleteTodo(todo.id)'></i>
             </div>
         </div>
     </div>
@@ -35,17 +41,38 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
   name: "Todos",
   data() {
       return {
-          type: 'allTasks'
+          type: 'allTasks',
+          isLoading: false
       }
+  },
+  components: {
+       Loading
   },
   methods: {
       ...mapActions([
-          'fetchTodos'
-      ])
+          'fetchTodos',
+          'deleteTodo',
+          'updateTodo'
+      ]),
+      toggleStatus(todo) {
+          this.isLoading = true;
+          const updTodo = {
+              id: todo.id,
+              title: todo.title,
+              completed: !todo.completed
+          }
+          this.updateTodo(updTodo);
+          setTimeout(() => {
+             this.isLoading = false
+          },500)
+      }
+
   },
   computed: {
     ...mapGetters([
@@ -90,12 +117,12 @@ export default {
         cursor: pointer;
     }
     .todo {
-        text-align: center;
+        text-align: justify;
         border: 1px solid #ccc;
         background: #41b883;
         padding: 1rem;
         border-radius: 0.3rem;
-        cursor: pointer;
+        position: relative;
     }
     .todo:hover {
         background: green;
@@ -103,5 +130,23 @@ export default {
     }
     .grid-4 {
         grid-template-columns: repeat(4,1fr);
+    }
+    .icon {
+        position: absolute;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        color: #ffffff;
+    }
+    .complete-box {
+        padding: 3px 10px;
+        background: #35495e;
+    }
+    .incomplete-box {
+        padding: 3px 10px;
+        background: #41b883;
+    }
+    .is-complete {
+        background: #35495e;
+        color: #ccc;
     }
 </style>

@@ -1,17 +1,26 @@
 <template>
   <div id="app">
     <div class="container">
+      <VueLoader />
+      <AddTodo />
+      <FilterTodos />
       <Todos />
     </div>
   </div>
 </template>
 
 <script>
-import Todos from './views/Todos.vue'
+import Todos from './components/Todos.vue'
+import AddTodo from './components/AddTodo.vue'
+import FilterTodos from './components/FilterTodos.vue'
+import VueLoader from './components/VueLoader.vue'
 export default {
   name: 'app',
   components: {
-    Todos
+    Todos,
+    AddTodo,
+    FilterTodos,
+    VueLoader
   }
 }
 </script>
