@@ -1,9 +1,5 @@
 <template>
     <div id="Todos">
-        <loading :active.sync="isLoading" 
-        :can-cancel="false" 
-        :is-full-page="true"></loading>
-
         <div class="todos">
             <button class="navBtn" @click="type='allTasks'">All Tasks</button>
             <button class="navBtn" @click="type='doneTasks'">Completed</button>
@@ -19,19 +15,18 @@
             <h2 v-show="type==='undoneTasks'">{{undoneTodosCount}} Tasks to be done</h2>
         </div>
         <div class="todos" v-if="type==='allTasks'">
-            <div v-for="todo in allTodos" :key="todo.id" class="todo" :class="{'is-complete': todo.completed}" @dblclick="toggleStatus(todo)">
-                {{todo.title}}
-                <i class="fas fa-trash-alt icon" @click='deleteTodo(todo.id)'></i>
+            <div v-for="todo in allTodos" :key="todo.id" >
+                <Task @dblclick="toggleStatus(todo)" :class="{'is-complete': todo.completed}" class="todo" :todo='todo'></Task>
             </div>
         </div>
         <div class="todos" v-if="type==='doneTasks'">
-            <div v-for="todo in doneTodos" :key="todo.id" class="todo">
+            <div v-for="todo in doneTodos" :key="todo.id" class="todo" :class="{'is-complete': todo.completed}" @dblclick="toggleStatus(todo)">
                 {{todo.title}}
                 <i class="fas fa-trash-alt icon" @click='deleteTodo(todo.id)'></i>
             </div>
         </div>
         <div class="todos" v-if="type==='undoneTasks'">
-            <div v-for="todo in undoneTodos" :key="todo.id" class="todo">
+            <div v-for="todo in undoneTodos" :key="todo.id" class="todo" :class="{'is-complete': todo.completed}" @dblclick="toggleStatus(todo)">
                 {{todo.title}}
                 <i class="fas fa-trash-alt icon" @click='deleteTodo(todo.id)'></i>
             </div>
@@ -41,8 +36,8 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
-import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import Task from '@/components/Task.vue'
 export default {
   name: "Todos",
   data() {
@@ -52,13 +47,14 @@ export default {
       }
   },
   components: {
-       Loading
+      Task
   },
   methods: {
       ...mapActions([
           'fetchTodos',
           'deleteTodo',
-          'updateTodo'
+          'updateTodo',
+          'updateTask'
       ]),
       toggleStatus(todo) {
           this.isLoading = true;

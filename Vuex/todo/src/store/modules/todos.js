@@ -47,6 +47,12 @@ export const store = new Vuex.Store({
             if(index !== -1) {
                 state.todos.splice(index, 1, updTodo);
             }
+        },
+        updateTask: (state, updTask) => {
+            const index = state.todos.findIndex(todo => todo.id === updTask.id);
+            if(index != -1) {
+                console.log(state.todos);
+            }
         }
     },
     actions: {
@@ -75,6 +81,11 @@ export const store = new Vuex.Store({
             const response = await Axios.put(`https://jsonplaceholder.typicode.com/todos/${updTodo.id}`, updTodo);
 
             commit('updateTodo', response.data);
-        }
+        },
+        async updateTask({commit}, updTask) {
+            const response = await Axios.put(`https://jsonplaceholder.typicode.com/todos/${updTask.id}`, updTask);
+
+            commit('updateTask', response.data);
+        } 
     }
 })
