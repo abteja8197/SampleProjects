@@ -145,7 +145,7 @@
     "i18next-xhr-backend": "1.5.1",
     "jquery": "3.3.1",
     "json-loader": "0.5.7",
-    "marked": "0.5.0",
+    "marked": "4.0.10",
     "mini-css-extract-plugin": "^0.4.2",
     "mocha": "5.2.0",
     "nightwatch": "0.9.15",
